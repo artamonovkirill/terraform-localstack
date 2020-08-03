@@ -1,0 +1,28 @@
+plugins {
+    id 'groovy'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'org.spockframework:spock-core:2.0-M3-groovy-3.0'
+
+    testImplementation 'org.testcontainers:localstack:1.14.3'
+    testImplementation 'com.amazonaws:aws-java-sdk:1.11.825'
+}
+
+test {
+    useJUnitPlatform()
+    outputs.upToDateWhen { false }
+    testLogging {
+        showStandardStreams true
+        events 'FAILED'
+        exceptionFormat 'full'
+    }
+}
+
+wrapper {
+    gradleVersion = '6.5.1'
+}
