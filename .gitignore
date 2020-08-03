@@ -1,0 +1,14 @@
+# IntelliJ
+**.iml
+.idea/**/*.*
+!.idea/codeStyles/*.*
+
+# Terraform
+.terraform/
+provider.tf
+terraform.tfstate
+terraform.tfstate.backup
+
+# Gradle
+.gradle/
+build/
