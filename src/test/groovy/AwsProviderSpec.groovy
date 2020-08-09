@@ -22,7 +22,7 @@ class AwsProviderSpec extends Specification {
         apply.exitValue == 0
 
         where:
-        version << ['2.70.0', '3.0.0']
+        version << ['2.70.0', '3.0.0', '3.1.0']
     }
 
     def cleanup() {
