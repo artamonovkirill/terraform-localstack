@@ -1,4 +1,3 @@
-import com.amazonaws.client.builder.AwsClientBuilder
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
 
@@ -8,8 +7,8 @@ class LocalStack {
     final secretKey = 'bar'
     final region = 'eu-west-1'
 
-    LocalStack() {
-        container = new GenericContainer('localstack/localstack:0.11.3')
+    LocalStack(version) {
+        container = new GenericContainer("localstack/localstack:$version")
                 .withEnv(SERVICES: 's3', DEFAULT_REGION: region)
                 .withExposedPorts(4566)
                 .waitingFor(Wait.forLogMessage(/.*Ready[.].*/, 1))

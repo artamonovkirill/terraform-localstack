@@ -3,16 +3,13 @@ import spock.lang.Unroll
 
 class AwsProviderSpec extends Specification {
 
-    def localstack = new LocalStack()
-
-    def setup() {
-        localstack.start()
-    }
-
     @Unroll
-    def 'creates an S3 bucket with #version AWS provider'() {
+    def 'creates an S3 bucket with #awsProviderVersion AWS provider and #localstackVersion LocalStack'() {
         given:
-        Terraform.Provider.generate(localstack, version)
+        def localstack = new LocalStack(localstackVersion)
+        localstack.start()
+        and:
+        Terraform.Provider.generate(localstack, awsProviderVersion)
         Terraform.init()
 
         when:
@@ -21,14 +18,24 @@ class AwsProviderSpec extends Specification {
         then:
         apply.exitValue == 0
 
+        cleanup:
+        localstack.stop()
+
         where:
-        version << ['2.70.0']
+        awsProviderVersion | localstackVersion
+        '2.70.0'           | '0.11.3'
+        '2.70.0'           | 'latest'
+        '3.1.0'            | 'latest'
+        '3.4.0'            | 'latest'
     }
 
     @Unroll
-    def 'fails to create an S3 bucket with #version AWS provider'() {
+    def 'fails to create an S3 bucket with #awsProviderVersion AWS provider and #localstackVersion LocalStack'() {
         given:
-        Terraform.Provider.generate(localstack, version)
+        def localstack = new LocalStack(localstackVersion)
+        localstack.start()
+        and:
+        Terraform.Provider.generate(localstack, awsProviderVersion)
         Terraform.init()
 
         when:
@@ -37,12 +44,15 @@ class AwsProviderSpec extends Specification {
         then:
         apply.exitValue != 0
 
-        where:
-        version << ['3.0.0', '3.1.0']
-    }
-
-    def cleanup() {
+        cleanup:
         localstack.stop()
+
+        where:
+        awsProviderVersion | localstackVersion
+        '3.0.0'            | 'latest'
+        '3.0.0'            | '0.11.3'
+        '3.1.0'            | '0.11.3'
+        '3.4.0'            | '0.11.3'
     }
 
 }
