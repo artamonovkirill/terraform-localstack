@@ -1,7 +1,7 @@
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class AwsProviderSpec extends Specification {
+class S3Spec extends Specification {
 
     @Unroll
     def 'creates an S3 bucket with #awsProviderVersion AWS provider and #localstackVersion LocalStack'() {
