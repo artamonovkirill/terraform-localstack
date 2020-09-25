@@ -1,5 +1,8 @@
 import org.testcontainers.containers.GenericContainer
-import org.testcontainers.containers.wait.strategy.Wait
+
+import static org.testcontainers.containers.wait.strategy.Wait.forLogMessage
+import static org.testcontainers.images.PullPolicy.alwaysPull
+import static org.testcontainers.images.PullPolicy.defaultPolicy
 
 class LocalStack {
     final GenericContainer container
@@ -9,9 +12,10 @@ class LocalStack {
 
     LocalStack(version) {
         container = new GenericContainer("localstack/localstack:$version")
+                .withImagePullPolicy(version == 'latest' ? alwaysPull() : defaultPolicy())
                 .withEnv(SERVICES: 's3', DEFAULT_REGION: region)
                 .withExposedPorts(4566)
-                .waitingFor(Wait.forLogMessage(/.*Ready[.].*/, 1))
+                .waitingFor(forLogMessage(/.*Ready[.].*/, 1))
     }
 
     def start() {
