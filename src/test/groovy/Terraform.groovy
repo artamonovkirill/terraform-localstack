@@ -33,4 +33,14 @@ provider "aws" {
 }"""
         }
     }
+
+    static class Module {
+        static generate(String folder) {
+            new File('main.tf').text = """
+module "_" {
+    source = "./${folder}"
+}
+"""
+        }
+    }
 }

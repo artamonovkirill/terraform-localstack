@@ -5,6 +5,7 @@
 
 # Terraform
 .terraform/
+main.tf
 provider.tf
 terraform.tfstate
 terraform.tfstate.backup

@@ -10,6 +10,7 @@ class S3Spec extends Specification {
         localstack.start()
         and:
         Terraform.Provider.generate(localstack, awsProviderVersion)
+        Terraform.Module.generate('s3')
         Terraform.init()
 
         when:
@@ -36,6 +37,7 @@ class S3Spec extends Specification {
         localstack.start()
         and:
         Terraform.Provider.generate(localstack, awsProviderVersion)
+        Terraform.Module.generate('s3')
         Terraform.init()
 
         when:
