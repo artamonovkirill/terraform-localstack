@@ -1,0 +1,1 @@
+exports.handler = async () => Promise.resolve('foo')

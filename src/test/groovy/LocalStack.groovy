@@ -13,9 +13,13 @@ class LocalStack {
     LocalStack(version) {
         container = new GenericContainer("localstack/localstack:$version")
                 .withImagePullPolicy(version == 'latest' ? alwaysPull() : defaultPolicy())
-                .withEnv(SERVICES: 's3', DEFAULT_REGION: region)
+                .withEnv(
+                        SERVICES: 's3,iam,lambda',
+                        DEFAULT_REGION: region,
+                        LAMBDA_EXECUTOR: 'docker')
                 .withExposedPorts(4566)
                 .waitingFor(forLogMessage(/.*Ready[.].*/, 1))
+        container.withFileSystemBind('//var/run/docker.sock', '/var/run/docker.sock')
     }
 
     def start() {
@@ -26,7 +30,7 @@ class LocalStack {
         container.stop()
     }
 
-    String getEndpoint() {
-        "http://localhost:${container.getMappedPort(4566)}"
+    URI getEndpoint() {
+        "http://localhost:${container.getMappedPort(4566)}".toURI()
     }
 }

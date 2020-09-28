@@ -9,16 +9,32 @@ class Terraform {
     }
 
     static class Provider {
-        static generate(LocalStack localstack, version) {
+        static generate(LocalStack localstack, String stateBucket, version = null) {
             new File('provider.tf').text = """
 terraform {
+  backend "s3" {
+    bucket = "${stateBucket}"
+    key = "terraform.tfstate"
+    region = "eu-west-1"
+    
+    force_path_style = true
+    
+    endpoint = "${localstack.endpoint}"
+    access_key = "${localstack.accessKey}"
+    secret_key = "${localstack.secretKey}"
+    skip_credentials_validation = true
+  }
+  
+  ${version != null ? """
   required_providers {
     aws = "$version"
-  } 
+  }""" : ''}
 }
 
 provider "aws" {
   endpoints {
+    iam = "${localstack.endpoint}"
+    lambda = "${localstack.endpoint}"
     s3 = "${localstack.endpoint}"
   }
   

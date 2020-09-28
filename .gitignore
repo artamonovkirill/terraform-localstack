@@ -5,12 +5,12 @@
 
 # Terraform
 .terraform/
-main.tf
+/main.tf
 provider.tf
-terraform.tfstate
-terraform.tfstate.backup
-.terraform.tfstate.lock.info
 
 # Gradle
 .gradle/
 build/
+
+# Test artifacts
+lambda.zip

@@ -3,13 +3,18 @@ import spock.lang.Unroll
 
 class S3Spec extends Specification {
 
+    def stateBucket = 'test'
+
     @Unroll
     def 'creates an S3 bucket with #awsProviderVersion AWS provider and #localstackVersion LocalStack'() {
         given:
         def localstack = new LocalStack(localstackVersion)
         localstack.start()
         and:
-        Terraform.Provider.generate(localstack, awsProviderVersion)
+        def s3 = AWS.s3(localstack)
+        s3.createBucket { it.bucket(stateBucket) }
+        and:
+        Terraform.Provider.generate(localstack, stateBucket, awsProviderVersion)
         Terraform.Module.generate('s3')
         Terraform.init()
 
@@ -36,7 +41,10 @@ class S3Spec extends Specification {
         def localstack = new LocalStack(localstackVersion)
         localstack.start()
         and:
-        Terraform.Provider.generate(localstack, awsProviderVersion)
+        def s3 = AWS.s3(localstack)
+        s3.createBucket { it.bucket(stateBucket) }
+        and:
+        Terraform.Provider.generate(localstack, stateBucket, awsProviderVersion)
         Terraform.Module.generate('s3')
         Terraform.init()
 

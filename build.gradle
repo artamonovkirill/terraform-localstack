@@ -11,6 +11,10 @@ dependencies {
 
     testImplementation 'org.testcontainers:localstack:1.14.3'
     testImplementation 'com.amazonaws:aws-java-sdk:1.11.870'
+
+    testImplementation platform('software.amazon.awssdk:bom:2.14.9')
+    testImplementation 'software.amazon.awssdk:lambda'
+    testImplementation 'software.amazon.awssdk:s3'
 }
 
 test {
