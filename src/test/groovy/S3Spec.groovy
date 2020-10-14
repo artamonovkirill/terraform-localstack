@@ -33,6 +33,7 @@ class S3Spec extends Specification {
         '2.70.0'           | 'latest'
         '3.1.0'            | '0.11.5'
         '3.8.0'            | '0.11.5'
+        '3.8.0'            | 'latest'
     }
 
     @Unroll
@@ -64,7 +65,6 @@ class S3Spec extends Specification {
         '3.1.0'            | '0.11.4' // https://github.com/localstack/localstack/issues/2832
         '3.8.0'            | '0.11.4' // https://github.com/localstack/localstack/issues/2832
         '3.0.0'            | 'latest'
-        '3.8.0'            | 'latest'
     }
 
 }
