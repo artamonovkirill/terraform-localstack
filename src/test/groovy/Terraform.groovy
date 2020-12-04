@@ -1,6 +1,6 @@
 class Terraform {
     static init() {
-        def init = Process.run('terraform init --reconfigure')
+        def init = Process.run('terraform init -reconfigure -upgrade')
         assert init.exitValue == 0
     }
 
