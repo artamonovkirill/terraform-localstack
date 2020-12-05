@@ -1,14 +1,14 @@
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class LambdaSpec extends Specification {
+class LambdaSpec extends TerraformSpec {
 
     def stateBucket = 'test'
 
     @Unroll
     def 'invokes a lambda with #version LocalStack'(version) {
         given:
-        def localstack = new LocalStack(version)
+        localstack = new LocalStack(version)
         localstack.start()
         and:
         def s3 = AWS.s3(localstack)
@@ -32,9 +32,6 @@ class LambdaSpec extends Specification {
         then:
         result.statusCode() == 200
         !result.functionError()
-
-        cleanup:
-        localstack.stop()
 
         where:
         version << ['0.11.5', 'latest']
