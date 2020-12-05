@@ -1,4 +1,3 @@
-import spock.lang.Specification
 import spock.lang.Unroll
 
 class LambdaSpec extends TerraformSpec {
@@ -34,7 +33,9 @@ class LambdaSpec extends TerraformSpec {
         !result.functionError()
 
         where:
-        version << ['0.11.5', 'latest']
+        version << [
+                // '0.11.5', // everything below 0.12.2, see https://github.com/localstack/localstack/issues/3297
+                'latest']
     }
 
 }
