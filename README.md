@@ -1,4 +1,4 @@
-# Terraform with LocalStack [![Build Status](https://travis-ci.com/artamonovkirill/terraform-localstack.svg?branch=main)](https://travis-ci.com/artamonovkirill/terraform-localstack)
+# Terraform with LocalStack ![Gradle](https://github.com/artamonovkirill/terraform-localstack/workflows/Gradle/badge.svg)
 
 This repository is a test of Terraform AWS provider integration with LocalStack.
 
