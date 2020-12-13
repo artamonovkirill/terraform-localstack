@@ -13,7 +13,7 @@ jobs:
         with:
           java-version: 15
       - name: Install Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v1.3.2
       - name: Cache
         uses: actions/cache@v2
         with:
