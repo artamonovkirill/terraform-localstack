@@ -8,14 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup
+      - name: Install Java
         uses: actions/setup-java@v1
         with:
           java-version: 15
       - name: Install Terraform
-        run: |
-          ci/install_terraform.sh
-          terraform --version
+        uses: hashicorp/setup-terraform@v1
       - name: Cache
         uses: actions/cache@v2
         with:
