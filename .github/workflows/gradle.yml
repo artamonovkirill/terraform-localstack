@@ -6,14 +6,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: terraform:latest
     steps:
       - uses: actions/checkout@v2
       - name: Install Java
         uses: actions/setup-java@v1
         with:
           java-version: 15
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v1
       - name: Cache
         uses: actions/cache@v2
         with:
