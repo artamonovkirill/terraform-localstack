@@ -1,5 +1,3 @@
-rootProject.name = 'Terraform on LocalStack'
-
 plugins {
     id 'com.gradle.enterprise' version '3.5'
 }
@@ -10,3 +8,5 @@ gradleEnterprise {
         termsOfServiceAgree = 'yes'
     }
 }
+
+rootProject.name = 'Terraform on LocalStack'
