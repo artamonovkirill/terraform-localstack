@@ -1,5 +1,7 @@
 class Terraform {
     static init() {
+        def version = Process.run('terraform --version')
+        assert version.exitValue == 0
         def init = Process.run('terraform init -reconfigure -upgrade')
         assert init.exitValue == 0
     }
