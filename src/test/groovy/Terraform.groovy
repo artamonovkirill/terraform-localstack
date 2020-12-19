@@ -1,7 +1,5 @@
 class Terraform {
     static init() {
-        def version = Process.run('terraform --version')
-        assert version.exitValue == 0
         def init = Process.run('terraform init -reconfigure -upgrade')
         assert init.exitValue == 0
     }
@@ -27,7 +25,7 @@ terraform {
     skip_credentials_validation = true
   }
   
-  ${version != null ? """
+  ${version != null && version != 'latest' ? """
   required_providers {
     aws = "$version"
   }""" : ''}
