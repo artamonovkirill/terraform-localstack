@@ -32,6 +32,9 @@ class LambdaSpec extends TerraformSpec {
         result.statusCode() == 200
         !result.functionError()
 
+        cleanup:
+        print result.payload().asUtf8String()
+
         where:
         awsProviderVersion | localstackVersion
         '2.70.0'           | '0.12.3'
