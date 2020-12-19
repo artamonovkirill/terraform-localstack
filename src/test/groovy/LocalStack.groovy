@@ -16,7 +16,8 @@ class LocalStack {
                 .withEnv(
                         SERVICES: 's3,iam,lambda',
                         DEFAULT_REGION: region,
-                        LAMBDA_EXECUTOR: 'docker')
+                        LAMBDA_EXECUTOR: 'docker',
+                        LAMBDA_REMOTE_DOCKER: 'true') // https://github.com/localstack/localstack/issues/3185
                 .withExposedPorts(4566)
                 .waitingFor(forLogMessage(/.*Ready[.].*/, 1))
         container.withFileSystemBind('//var/run/docker.sock', '/var/run/docker.sock')
