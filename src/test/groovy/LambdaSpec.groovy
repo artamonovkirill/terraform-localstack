@@ -37,12 +37,8 @@ class LambdaSpec extends TerraformSpec {
 
         where:
         awsProviderVersion | localstackVersion
-        '2.70.0'           | '0.12.3'
-        '2.70.0'           | 'latest'
-        '3.18.0'           | '0.12.3'
-        '3.18.0'           | 'latest'
-        '3.21.0'           | '0.12.3'
-        '3.21.0'           | 'latest'
+        '3.29.0'           | '0.12.3'
+        '3.29.0'           | 'latest'
         'latest'           | '0.12.3'
         'latest'           | 'latest'
     }
